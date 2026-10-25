@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "dachshund",
+	"version": "${version}",
+	"name": "Dachshund",
+	"description": "Adds a loyal dachshund companion! Craft a Dachshund Whistle from a bone and two iron nuggets to spawn your own tame dachshund. It follows you everywhere, sits when told, can be fed bones and can never be hurt. Creepers keep their distance from it, just like they do from cats.",
+	"authors": [
+		"Mnjongen"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/dachshund-mnjongen"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/dachshund/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.mnjongen.dachshund.Dachshund"
+		],
+		"client": [
+			"com.mnjongen.dachshund.client.DachshundClient"
+		],
+		"fabric-datagen": [
+			"com.mnjongen.dachshund.client.DachshundDataGenerator"
+		]
+	},
+	"mixins": [
+		"dachshund.mixins.json",
+		{
+			"config": "dachshund.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

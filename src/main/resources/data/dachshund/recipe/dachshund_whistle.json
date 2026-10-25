@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "N": "minecraft:iron_nugget",
+    "B": "minecraft:bone"
+  },
+  "pattern": [
+    "NBN"
+  ],
+  "result": {
+    "id": "dachshund:dachshund_whistle"
+  }
+}

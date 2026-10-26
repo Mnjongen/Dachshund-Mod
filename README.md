@@ -25,3 +25,8 @@ The mod jar ends up in `build/libs/`. To start a test client, run `./gradlew run
 
 - Mod by Mnjongen
 - Dachshund model and texture: *[original creator / resource pack]*
+
+## License
+
+The code of this mod is available under the [MIT License](LICENSE).
+The dachshund model and texture belong to their original creator and are not covered by this license.

@@ -10,7 +10,7 @@
 	"contact": {
 		"homepage": "https://modrinth.com/mod/dachshund-mnjongen"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/dachshund/icon.png",
 	"environment": "*",
 	"entrypoints": {

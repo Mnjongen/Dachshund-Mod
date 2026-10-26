@@ -2,6 +2,9 @@
 # and submitted pull request. This can help catch issues that only occur on
 # certain platforms or Java versions, and provides a first line of defence
 # against bad commits.
+#
+# Pushes to main also create a GitHub release for the version in
+# gradle.properties, unless a release for that version already exists.
 
 name: build
 on: [pull_request, push]
@@ -9,6 +12,8 @@ on: [pull_request, push]
 jobs:
   build:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write # needed to create releases
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -28,3 +33,21 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - name: read mod version
+        id: version
+        run: echo "version=$(grep '^version=' gradle.properties | cut -d= -f2 | tr -d '\r')" >> "$GITHUB_OUTPUT"
+      - name: create release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if gh release view "v$VERSION" > /dev/null 2>&1; then
+            echo "Release v$VERSION already exists, skipping. Raise 'version' in gradle.properties to publish a new release."
+          else
+            gh release create "v$VERSION" "build/libs/dachshund-$VERSION.jar" \
+              --title "Dachshund $VERSION" \
+              --target "$GITHUB_SHA" \
+              --generate-notes
+          fi
